@@ -4,7 +4,7 @@ RSpec.describe BagOfHolding::Dice::MultiplicationOperation do
 
   subject do
     BagOfHolding::Dice::MultiplicationOperation.new left: left,
-                                              right: right
+                                                    right: right
   end
 
   describe '#value' do
