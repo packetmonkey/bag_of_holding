@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::Parser do
   subject { BagOfHolding::Dice::Parser.new }
 

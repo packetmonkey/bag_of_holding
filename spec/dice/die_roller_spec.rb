@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::DieRoller do
   let(:die) { BagOfHolding::Dice::Die.new sides: 20, explode: 19, reroll: 2 }
   subject { BagOfHolding::Dice::DieRoller.new die: die }

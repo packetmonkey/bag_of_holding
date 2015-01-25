@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::Die do
   subject do
     BagOfHolding::Dice::Die.new sides: 20,

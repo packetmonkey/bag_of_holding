@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::Pool do
   let(:die) { BagOfHolding::Dice::Die.new sides: 10 }
   subject { BagOfHolding::Dice::Pool.new count: 2, die: die }

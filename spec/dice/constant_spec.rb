@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::Constant do
   subject { BagOfHolding::Dice::Constant.new value: 5 }
 

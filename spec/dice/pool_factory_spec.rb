@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::PoolFactory do
   subject { BagOfHolding::Dice::PoolFactory }
 

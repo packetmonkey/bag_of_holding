@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::Transform do
   subject       { BagOfHolding::Dice::Transform.new }
   let(:parser)  { BagOfHolding::Dice::Parser.new    }

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe BagOfHolding::Dice::Operation do
   let(:left) { BagOfHolding::Dice::Constant.new value: 3 }
   let(:operator) { '+' }
