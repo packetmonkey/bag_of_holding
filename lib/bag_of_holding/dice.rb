@@ -7,6 +7,7 @@ require 'bag_of_holding/dice/die_roller'
 require 'bag_of_holding/dice/die_result'
 
 require 'bag_of_holding/dice/operation'
+require 'bag_of_holding/dice/addition_operation'
 require 'bag_of_holding/dice/operation_result'
 
 require 'bag_of_holding/dice/parser'

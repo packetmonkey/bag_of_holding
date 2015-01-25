@@ -22,6 +22,8 @@ RSpec.describe BagOfHolding::Dice::Operation do
 
   describe '#roll' do
     it 'returns an OperationResult' do
+      allow(subject).to receive(:value).and_return(8)
+
       expect(subject.roll).to eq(
         BagOfHolding::Dice::OperationResult.new(
           left_result: left.roll,

@@ -68,7 +68,7 @@ RSpec.describe BagOfHolding::Dice::Transform do
     it 'transforms 5+6' do
       tree = parser.parse '5+6'
       expect(subject.apply(tree)).to match([
-        BagOfHolding::Dice::Operation.new(
+        BagOfHolding::Dice::AdditionOperation.new(
           left: BagOfHolding::Dice::Constant.new(value: 5),
           operator: '+',
           right: BagOfHolding::Dice::Constant.new(value: 6)
@@ -87,7 +87,7 @@ RSpec.describe BagOfHolding::Dice::Transform do
     it 'transforms 1 + 2, 3' do
       tree = parser.parse '1 + 2, 3'
       expect(subject.apply(tree)).to match([
-        BagOfHolding::Dice::Operation.new(
+        BagOfHolding::Dice::AdditionOperation.new(
           left: BagOfHolding::Dice::Constant.new(value: 1),
           operator: '+',
           right: BagOfHolding::Dice::Constant.new(value: 2)
@@ -160,7 +160,7 @@ RSpec.describe BagOfHolding::Dice::Transform do
     it 'transforms 1d20 + 5' do
       tree = parser.parse '1d20 + 5'
       expect(subject.apply(tree)).to match([
-        BagOfHolding::Dice::Operation.new(
+        BagOfHolding::Dice::AdditionOperation.new(
           left: BagOfHolding::Dice::Pool.new(
             count: 1,
             die: BagOfHolding::Dice::Die.new(sides: 20)
@@ -174,19 +174,19 @@ RSpec.describe BagOfHolding::Dice::Transform do
     it 'transforms 2d6r+ 1d4 + 2+1d8' do
       tree = parser.parse '2d6r+ 1d4 + 2+1d8'
       expect(subject.apply(tree)).to match([
-        BagOfHolding::Dice::Operation.new(
+        BagOfHolding::Dice::AdditionOperation.new(
           left: BagOfHolding::Dice::Pool.new(
             count: 2,
             die: BagOfHolding::Dice::Die.new(sides: 6, reroll: 1)
           ),
           operator: '+',
-          right: BagOfHolding::Dice::Operation.new(
+          right: BagOfHolding::Dice::AdditionOperation.new(
             left: BagOfHolding::Dice::Pool.new(
               count: 1,
               die: BagOfHolding::Dice::Die.new(sides: 4)
             ),
             operator: '+',
-            right: BagOfHolding::Dice::Operation.new(
+            right: BagOfHolding::Dice::AdditionOperation.new(
               left: BagOfHolding::Dice::Constant.new(value: 2),
               operator: '+',
               right: BagOfHolding::Dice::Pool.new(

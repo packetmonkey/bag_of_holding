@@ -36,9 +36,14 @@ module BagOfHolding
       end
 
       def self.build_operation(left:, operator:, right:)
-        BagOfHolding::Dice::Operation.new left: left,
-                                          operator: operator,
-                                          right: right
+        case operator
+        when '+'
+          BagOfHolding::Dice::AdditionOperation.new left: left,
+                                                    operator: operator,
+                                                    right: right
+        else
+          fail ArgumentError, "Unrecognized operator #{operator}"
+        end
       end
 
       def self.build_const(value:)

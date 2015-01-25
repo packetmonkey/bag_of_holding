@@ -11,12 +11,6 @@ module BagOfHolding
       end
 
       def roll
-        left_result = left.roll
-        right_result = right.roll
-
-        # We currently only support addition
-        value = left_result.value + right_result.value
-
         BagOfHolding::Dice::OperationResult.new left_result: left_result,
                                                 right_result: right_result,
                                                 operation: self,
@@ -33,6 +27,20 @@ module BagOfHolding
         end
 
         true
+      end
+
+      private
+
+      def value
+        fail NotImplementedError
+      end
+
+      def left_result
+        @left_result ||= left.roll
+      end
+
+      def right_result
+        @right_result ||= right.roll
       end
     end
   end
