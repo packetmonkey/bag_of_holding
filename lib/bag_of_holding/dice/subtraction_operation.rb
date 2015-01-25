@@ -2,6 +2,10 @@ module BagOfHolding
   module Dice
     # Internal: Encapsulates subtracting two expressions
     class SubtractionOperation < Operation
+      def self.operator
+        '-'
+      end
+
       def value
         left_result.value - right_result.value
       end

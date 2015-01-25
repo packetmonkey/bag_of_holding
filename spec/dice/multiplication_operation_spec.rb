@@ -7,6 +7,12 @@ RSpec.describe BagOfHolding::Dice::MultiplicationOperation do
                                                     right: right
   end
 
+  describe '::operator' do
+    it 'returns *' do
+      expect(BagOfHolding::Dice::MultiplicationOperation.operator).to eq('*')
+    end
+  end
+
   describe '#value' do
     it 'subtracts the right value from the left' do
       expect(subject.value).to eq(8)
