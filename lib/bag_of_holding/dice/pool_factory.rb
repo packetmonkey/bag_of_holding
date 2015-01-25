@@ -40,16 +40,17 @@ module BagOfHolding
 
       def die_attrs
         die_options.reduce({}) do |attrs, attr|
-          key = attr.keys.first
-
-          if attr.values.first.nil?
-            value = DIE_DEFAULTS[key].call(attrs)
-          else
-            value = attr.values.first.to_i
-          end
-
-          attrs.merge(key => value)
+          attrs.merge die_attr(attr, attrs)
         end
+      end
+
+      def die_attr(attr, attrs)
+        name = attr.keys.first
+
+        value = attr.values.first
+        value = value.nil? ? DIE_DEFAULTS[name].call(attrs) : value.to_i
+
+        { name => value }
       end
 
       def die_options
