@@ -40,6 +40,9 @@ module BagOfHolding
         when '+'
           BagOfHolding::Dice::AdditionOperation.new left: left,
                                                     right: right
+        when '-'
+          BagOfHolding::Dice::SubtractionOperation.new left: left,
+                                                       right: right
         else
           fail ArgumentError, "Unrecognized operator #{operator}"
         end

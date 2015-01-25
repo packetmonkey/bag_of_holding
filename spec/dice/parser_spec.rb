@@ -54,6 +54,13 @@ RSpec.describe BagOfHolding::Dice::Parser do
       ])
     end
 
+    it 'parses 5-2' do
+      tree = subject.parse '5-2'
+      expect(tree).to match([
+        { left: { constant: '5' }, operator: '-', right: { constant: '2' } }
+      ])
+    end
+
     it 'parses 8, 9' do
       tree = subject.parse '8, 9'
       expect(tree).to match([
