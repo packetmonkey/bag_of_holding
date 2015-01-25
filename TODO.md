@@ -2,7 +2,7 @@
 - [X] Separate out die validation rules
 - [X] Implement subtraction operator
 - [X] Implement division operator
-- [ ] Implement multiplication operator
+- [X] Implement multiplication operator
 - [ ] Implement pool keep option
 - [ ] Implement pool drop option
 - [ ] Implement aliases

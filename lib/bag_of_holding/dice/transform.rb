@@ -46,6 +46,9 @@ module BagOfHolding
         when '/'
           BagOfHolding::Dice::DivisionOperation.new left: left,
                                                     right: right
+        when '*'
+          BagOfHolding::Dice::MultiplicationOperation.new left: left,
+                                                          right: right
         else
           fail ArgumentError, "Unrecognized operator #{operator}"
         end

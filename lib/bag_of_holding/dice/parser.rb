@@ -28,11 +28,14 @@ module BagOfHolding
       rule(:pool)       { count? >> die.as(:die) >> label? }
       rule(:constant)   { integer.as(:constant) }
 
-      rule(:addition)     { str('+') }
-      rule(:subtraction)  { str('-') }
-      rule(:division)     { str('/') }
-      rule(:operators)    { addition | subtraction | division }
-      rule(:operator)     { operators.as(:operator) >> space? }
+      rule(:addition)       { str('+') }
+      rule(:subtraction)    { str('-') }
+      rule(:division)       { str('/') }
+      rule(:multiplication) { str('*') }
+      rule(:operators) do
+        addition | subtraction | division | multiplication
+      end
+      rule(:operator)       { operators.as(:operator) >> space? }
 
       rule(:sum) { value.as(:left) >> operator >> expression.as(:right) }
 
