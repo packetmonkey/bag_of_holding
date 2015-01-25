@@ -1,7 +1,7 @@
 - [X] Separate out die rolling logic
 - [X] Separate out die validation rules
 - [X] Implement subtraction operator
-- [ ] Implement division operator
+- [X] Implement division operator
 - [ ] Implement multiplication operator
 - [ ] Implement pool keep option
 - [ ] Implement pool drop option

@@ -85,6 +85,16 @@ RSpec.describe BagOfHolding::Dice::Transform do
       ])
     end
 
+    it 'transforms 4/2' do
+      tree = parser.parse '4/2'
+      expect(subject.apply(tree)).to match([
+        BagOfHolding::Dice::DivisionOperation.new(
+          left: BagOfHolding::Dice::Constant.new(value: 4),
+          right: BagOfHolding::Dice::Constant.new(value: 2)
+        )
+      ])
+    end
+
     it 'transforms 8, 9' do
       tree = parser.parse '8, 9'
       expect(subject.apply(tree)).to match([

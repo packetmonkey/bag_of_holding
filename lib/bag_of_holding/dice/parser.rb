@@ -30,7 +30,8 @@ module BagOfHolding
 
       rule(:addition)     { str('+') }
       rule(:subtraction)  { str('-') }
-      rule(:operators)    { addition | subtraction }
+      rule(:division)     { str('/') }
+      rule(:operators)    { addition | subtraction | division }
       rule(:operator)     { operators.as(:operator) >> space? }
 
       rule(:sum) { value.as(:left) >> operator >> expression.as(:right) }
