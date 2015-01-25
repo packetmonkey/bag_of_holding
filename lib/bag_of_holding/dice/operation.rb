@@ -24,14 +24,13 @@ module BagOfHolding
       end
 
       def ==(other)
-        return false unless other.respond_to? :left
-        return false unless left == other.left
-
-        return false unless other.respond_to? :operator
-        return false unless operator == other.operator
-
-        return false unless other.respond_to? :right
-        return false unless right == other.right
+        begin
+          return false unless left == other.left
+          return false unless operator == other.operator
+          return false unless right == other.right
+        rescue NoMethodError
+          return false
+        end
 
         true
       end

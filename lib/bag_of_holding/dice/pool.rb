@@ -12,14 +12,13 @@ module BagOfHolding
       end
 
       def ==(other)
-        return false unless other.respond_to? :count
-        return false unless count == other.count
-
-        return false unless other.respond_to? :die
-        return false unless die == other.die
-
-        return false unless other.respond_to? :label
-        return false unless label == other.label
+        begin
+          return false unless count == other.count
+          return false unless die == other.die
+          return false unless label == other.label
+        rescue NoMethodError
+          return false
+        end
 
         true
       end
