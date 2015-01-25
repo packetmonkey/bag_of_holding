@@ -2,11 +2,10 @@ module BagOfHolding
   module Dice
     # Internal: Encapsulates an operation such as adding two dice pools
     class Operation
-      attr_accessor :left, :operator, :right
+      attr_accessor :left, :right
 
-      def initialize(left: nil, operator: nil, right: nil)
+      def initialize(left: nil, right: nil)
         self.left = left
-        self.operator = operator
         self.right = right
       end
 
@@ -20,7 +19,6 @@ module BagOfHolding
       def ==(other)
         begin
           return false unless left == other.left
-          return false unless operator == other.operator
           return false unless right == other.right
         rescue NoMethodError
           return false

@@ -5,17 +5,14 @@ RSpec.describe BagOfHolding::Dice::Operation do
 
   subject do
     BagOfHolding::Dice::Operation.new left: left,
-                                      operator: operator,
                                       right: right
   end
 
   describe '#initialize' do
     it 'sets the attributes passed' do
       op = BagOfHolding::Dice::Operation.new left: left,
-                                             operator: operator,
                                              right: right
       expect(op.left).to eq(left)
-      expect(op.operator).to eq(operator)
       expect(op.right).to eq(right)
     end
   end
@@ -38,7 +35,6 @@ RSpec.describe BagOfHolding::Dice::Operation do
   describe '#==' do
     let(:other) do
       BagOfHolding::Dice::Operation.new left: left,
-                                        operator: operator,
                                         right: right
     end
 
@@ -48,11 +44,6 @@ RSpec.describe BagOfHolding::Dice::Operation do
 
     it 'returns false with a different left' do
       other.left = BagOfHolding::Dice::Constant.new value: 30
-      expect(subject == other).to eq(false)
-    end
-
-    it 'returns false with a different operator' do
-      other.operator = '-'
       expect(subject == other).to eq(false)
     end
 

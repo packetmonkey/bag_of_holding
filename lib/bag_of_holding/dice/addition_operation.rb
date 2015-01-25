@@ -5,6 +5,10 @@ module BagOfHolding
       def value
         left_result.value + right_result.value
       end
+
+      def operator
+        '+'
+      end
     end
   end
 end

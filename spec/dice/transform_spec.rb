@@ -70,7 +70,6 @@ RSpec.describe BagOfHolding::Dice::Transform do
       expect(subject.apply(tree)).to match([
         BagOfHolding::Dice::AdditionOperation.new(
           left: BagOfHolding::Dice::Constant.new(value: 5),
-          operator: '+',
           right: BagOfHolding::Dice::Constant.new(value: 6)
         )
       ])
@@ -89,7 +88,6 @@ RSpec.describe BagOfHolding::Dice::Transform do
       expect(subject.apply(tree)).to match([
         BagOfHolding::Dice::AdditionOperation.new(
           left: BagOfHolding::Dice::Constant.new(value: 1),
-          operator: '+',
           right: BagOfHolding::Dice::Constant.new(value: 2)
         ),
         BagOfHolding::Dice::Constant.new(value: 3)
@@ -165,7 +163,6 @@ RSpec.describe BagOfHolding::Dice::Transform do
             count: 1,
             die: BagOfHolding::Dice::Die.new(sides: 20)
           ),
-          operator: '+',
           right: BagOfHolding::Dice::Constant.new(value: 5)
         )
       ])
@@ -179,16 +176,13 @@ RSpec.describe BagOfHolding::Dice::Transform do
             count: 2,
             die: BagOfHolding::Dice::Die.new(sides: 6, reroll: 1)
           ),
-          operator: '+',
           right: BagOfHolding::Dice::AdditionOperation.new(
             left: BagOfHolding::Dice::Pool.new(
               count: 1,
               die: BagOfHolding::Dice::Die.new(sides: 4)
             ),
-            operator: '+',
             right: BagOfHolding::Dice::AdditionOperation.new(
               left: BagOfHolding::Dice::Constant.new(value: 2),
-              operator: '+',
               right: BagOfHolding::Dice::Pool.new(
                 count: 1,
                 die: BagOfHolding::Dice::Die.new(sides: 8)

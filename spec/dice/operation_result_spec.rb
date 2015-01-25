@@ -1,11 +1,10 @@
 RSpec.describe BagOfHolding::Dice::OperationResult do
   let(:left) { BagOfHolding::Dice::Constant.new value: 3 }
-  let(:operator) { '+' }
   let(:right) { BagOfHolding::Dice::Constant.new value: 5 }
+
   let(:operation) do
-    BagOfHolding::Dice::Operation.new left: left,
-                                      operator: operator,
-                                      right: right
+    BagOfHolding::Dice::AdditionOperation.new left: left,
+                                              right: right
   end
 
   subject do
@@ -54,15 +53,6 @@ RSpec.describe BagOfHolding::Dice::OperationResult do
 
     it 'returns false with a different left_result' do
       other.left_result = right.roll
-      expect(subject == other).to eq(false)
-    end
-
-    it 'returns false with a different operation' do
-      other.operation = BagOfHolding::Dice::Operation.new(
-        left: left,
-        operator: '-',
-        right: right
-      )
       expect(subject == other).to eq(false)
     end
 
