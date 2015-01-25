@@ -1,0 +1,9 @@
+- [X] Separate out die rolling logic
+- [ ] Separate out die validation rules
+- [ ] Implement subtraction operator
+- [ ] Implement division operator
+- [ ] Implement multiplication operator
+- [ ] Implement pool keep option
+- [ ] Implement pool drop option
+- [ ] Implement aliases
+- [ ] Document all the things

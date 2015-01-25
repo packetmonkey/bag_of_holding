@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+
+require 'thor'
+
+$LOAD_PATH << File.expand_path('../../lib', __FILE__)
+require 'bag_of_holding'
+
+module BagOfHolding
+  # Internal: Externally executable entry points to the library
+  class CLI < Thor
+    option :verbose, type: :boolean
+    desc 'roll <dice string>', 'Roll dice pools specified in <dice string>'
+    def roll(str)
+      ::BagOfHolding::Dice.roll(str).each do |result|
+        if options[:verbose]
+          puts "#{result.value} = #{result.inspect}"
+        else
+          puts "#{result.value} = #{result}"
+        end
+      end
+    end
+  end
+end
+
+BagOfHolding::CLI.start(ARGV)
