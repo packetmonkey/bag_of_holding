@@ -1,9 +1,5 @@
 RSpec.describe BagOfHolding::Dice::Die do
-  subject do
-    BagOfHolding::Dice::Die.new sides: 20,
-                                explode: 19,
-                                reroll: 2
-  end
+  subject { BagOfHolding::Dice::Die.new sides: 20, explode: 19, reroll: 2 }
 
   describe '#initialize' do
     it 'sets the attributes on the class' do
@@ -11,7 +7,6 @@ RSpec.describe BagOfHolding::Dice::Die do
       expect(die.sides).to eq(8)
       expect(die.explode).to eq(20)
       expect(die.reroll).to eq(1)
-      expect(die.errors).to eq({})
     end
   end
 
@@ -54,21 +49,6 @@ RSpec.describe BagOfHolding::Dice::Die do
     end
   end
 
-  describe '#errors' do
-    it 'returns the errors hash' do
-      expect(subject.errors).to eq({})
-    end
-  end
-
-  describe '#errors=' do
-    it 'sets the errors hash' do
-      subject.errors = { sides: ['must exist in 3d space'] }
-      expect(subject.errors).to match(
-        sides: ['must exist in 3d space']
-      )
-    end
-  end
-
   describe '#==' do
     let(:other) do
       BagOfHolding::Dice::Die.new sides: subject.sides,
@@ -97,57 +77,16 @@ RSpec.describe BagOfHolding::Dice::Die do
   end
 
   describe '#valid?' do
-    it 'returns true with a valid die' do
+    it 'passes itself to DieValidator' do
+      allow(BagOfHolding::Dice::DieValidator).to(
+        receive(:valid?).and_return(true)
+      )
+
       expect(subject.valid?).to eq(true)
     end
 
-    context 'with no sides set' do
-      before { subject.sides = nil }
-
-      it 'returns false' do
-        expect(subject.valid?).to eq(false)
-      end
-
-      it 'sets the correct error flag' do
-        subject.valid?
-        expect(subject.errors[:sides]).to include("can't be blank")
-      end
-    end
-
-    context 'with an explode equal to reroll' do
-      before do
-        subject.explode = 10
-        subject.reroll  = 10
-      end
-
-      it 'returns false' do
-        expect(subject.valid?).to eq(false)
-      end
-
-      it 'sets an error on explode' do
-        subject.valid?
-        expect(subject.errors[:explode]).to include(
-          'must be higher than reroll'
-        )
-      end
-    end
-  end
-
-  context 'with a reroll higher than explode' do
-    before do
-      subject.explode = 10
-      subject.reroll = 11
-    end
-
-    it 'returns false' do
-      expect(subject.valid?).to eq(false)
-    end
-
-    it 'sets an error on explode' do
-      subject.valid?
-      expect(subject.errors[:reroll]).to include(
-        'must be lower than explode'
-      )
+    it 'returns true with a valid die' do
+      expect(subject.valid?).to eq(true)
     end
   end
 
@@ -156,6 +95,7 @@ RSpec.describe BagOfHolding::Dice::Die do
       before { subject.sides = nil }
 
       it 'raises a StandardError' do
+        allow(subject).to receive(:valid?).and_return(false)
         expect { subject.roll }.to raise_error(StandardError)
       end
     end

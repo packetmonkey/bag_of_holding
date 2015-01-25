@@ -2,6 +2,7 @@ require 'bag_of_holding/dice/constant'
 require 'bag_of_holding/dice/constant_result'
 
 require 'bag_of_holding/dice/die'
+require 'bag_of_holding/dice/die_validator'
 require 'bag_of_holding/dice/die_roller'
 require 'bag_of_holding/dice/die_result'
 
