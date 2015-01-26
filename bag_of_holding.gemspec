@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rubocop', '0.28.0'
   s.add_development_dependency 'rake', '0.9.6'
-  s.add_development_dependency 'rspec', '>= 3.1.0', '< 4.0'
+  s.add_development_dependency 'rspec', '~> 3.1'
   s.add_development_dependency 'pry', '0.10.1'
 
   s.files = Dir.glob("{lib,spec}/**/*") + %w[README.md Rakefile]
