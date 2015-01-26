@@ -3,7 +3,9 @@
 - [X] Implement subtraction operator
 - [X] Implement division operator
 - [X] Implement multiplication operator
-- [ ] Implement pool keep option
+
+- [X] Implement pool keep option
 - [ ] Implement pool drop option
+
 - [ ] Implement aliases
 - [ ] Document all the things

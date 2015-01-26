@@ -23,12 +23,21 @@ module BagOfHolding
       def build
         BagOfHolding::Dice::Pool.new count: pool_count,
                                      die: die,
-                                     label: raw_label
+                                     label: raw_label,
+                                     keep: keep
       end
 
       private
 
       attr_accessor :raw_count, :raw_die, :raw_label
+
+      def keep
+        keep_option = raw_die.find { |o| o.keys.first == :keep }
+        return nil if keep_option.nil?
+
+        value = keep_option.values.first
+        value.nil? ? 1 : value.to_i
+      end
 
       def pool_count
         raw_count.nil? ? 1 : raw_count.to_i

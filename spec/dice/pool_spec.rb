@@ -74,20 +74,46 @@ RSpec.describe BagOfHolding::Dice::Pool do
     let(:die_results) do
       [
         BagOfHolding::Dice::DieResult.new(rolls: [3], value: 3),
-        BagOfHolding::Dice::DieResult.new(rolls: [5], value: 5)
+        BagOfHolding::Dice::DieResult.new(rolls: [5], value: 5),
+        BagOfHolding::Dice::DieResult.new(rolls: [1], value: 1)
       ]
     end
+    subject { BagOfHolding::Dice::Pool.new count: 3, die: die }
 
     before :each do
       allow(die).to receive(:roll).and_return(*die_results)
     end
 
-    it 'sums the rolls of the dice in the pool' do
-      expect(subject.roll).to eq(
-        BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                           value: 8,
-                                           pool: subject
-      )
+    context 'without a keep value' do
+      it 'sums the rolls of the dice in the pool' do
+        expect(subject.roll).to eq(
+          BagOfHolding::Dice::PoolResult.new die_results: die_results,
+                                             value: 9,
+                                             pool: subject
+        )
+      end
+    end
+
+    context 'with a keep value of 1' do
+      it 'returns the value of the highest die' do
+        subject.keep = 1
+        expect(subject.roll).to eq(
+          BagOfHolding::Dice::PoolResult.new die_results: die_results,
+                                             value: 5,
+                                             pool: subject
+        )
+      end
+    end
+
+    context 'with a keep value of 2' do
+      it 'returns the value of the highest die' do
+        subject.keep = 2
+        expect(subject.roll).to eq(
+          BagOfHolding::Dice::PoolResult.new die_results: die_results,
+                                             value: 8,
+                                             pool: subject
+        )
+      end
     end
   end
 
