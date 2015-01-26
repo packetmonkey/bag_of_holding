@@ -6,12 +6,15 @@ include a dungeon generator, various card deck functions and anything else I
 think to include.
 
 ## Install
-Currently you can clone the repository directly to use it. I will eventually
-distribute it as a ruby gem.
-```sh
-git clone https://github.com/packetmonkey/bag_of_holding.git
-cd bag_of_holding
-bundle
+
+```shell
+gem install bag_of_holding
+```
+
+or add the following line to Gemfile:
+
+```ruby
+gem 'bag_of_holding'
 ```
 
 ## Usage
