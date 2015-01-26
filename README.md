@@ -1,4 +1,4 @@
-# Bag of Holding [![Code Climate](https://codeclimate.com/github/packetmonkey/bag_of_holding/badges/gpa.svg)](https://codeclimate.com/github/packetmonkey/bag_of_holding)
+# Bag of Holding [![Build Status](https://travis-ci.org/packetmonkey/bag_of_holding.svg?branch=travis)](https://travis-ci.org/packetmonkey/bag_of_holding) [![Code Climate](https://codeclimate.com/github/packetmonkey/bag_of_holding/badges/gpa.svg)](https://codeclimate.com/github/packetmonkey/bag_of_holding)
 
 Bag of Holding is a command line utility and library to help out with various
 table top gaming needs. It currently contains a dice roller but will grow to
