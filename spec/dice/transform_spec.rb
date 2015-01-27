@@ -196,6 +196,28 @@ RSpec.describe BagOfHolding::Dice::Transform do
       ])
     end
 
+    it 'transforms 2d20d' do
+      tree = parser.parse '2d20d'
+      expect(subject.apply(tree)).to match([
+        BagOfHolding::Dice::Pool.new(
+          count: 2,
+          die: BagOfHolding::Dice::Die.new(sides: 20),
+          drop: 1
+        )
+      ])
+    end
+
+    it 'transforms 3d20d2' do
+      tree = parser.parse '3d20d2'
+      expect(subject.apply(tree)).to match([
+        BagOfHolding::Dice::Pool.new(
+          count: 3,
+          die: BagOfHolding::Dice::Die.new(sides: 20),
+          drop: 2
+        )
+      ])
+    end
+
     it 'transforms 1d20 + 5' do
       tree = parser.parse '1d20 + 5'
       expect(subject.apply(tree)).to match([

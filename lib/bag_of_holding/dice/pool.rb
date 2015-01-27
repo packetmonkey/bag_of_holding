@@ -3,13 +3,14 @@ module BagOfHolding
     # Internal: Contains information about the number of dice in a pool, the
     # description of those dice and a label if it has one.
     class Pool
-      attr_accessor :count, :die, :label, :keep
+      attr_accessor :count, :die, :label, :keep, :drop
 
-      def initialize(count: nil, die: nil, label: nil, keep: nil)
+      def initialize(count: nil, die: nil, label: nil, keep: nil, drop: nil)
         self.count  = count
         self.die    = die
         self.label  = label
         self.keep   = keep
+        self.drop   = drop
       end
 
       def ==(other)
@@ -37,13 +38,27 @@ module BagOfHolding
       private
 
       def value
-        if keep.nil?
-          @value = die_values.reduce(&:+)
-        else
-          @value = die_values.sort.reverse.slice(0, keep).reduce(&:+)
-        end
+        @value ||= calculate_value
+      end
 
-        @value
+      def calculate_value
+        calculate_keep || calculate_drop || calculate_sum
+      end
+
+      def calculate_keep
+        die_values.sort.reverse.slice(0, keep).reduce(&:+) if keep
+      end
+
+      def calculate_drop
+        return unless drop
+
+        kept_dice_count = (die_values.length - drop) * -1
+        kept_dice = die_values.sort.slice(kept_dice_count, die_values.length)
+        kept_dice.reduce(&:+)
+      end
+
+      def calculate_sum
+        die_values.reduce(&:+)
       end
 
       def die_values
