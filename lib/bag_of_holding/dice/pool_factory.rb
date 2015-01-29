@@ -7,13 +7,6 @@ module BagOfHolding
         new(count: count, die: die, label: label).build
       end
 
-      DIE_OPTIONS = [:sides, :reroll, :explode]
-
-      DIE_DEFAULTS = {
-        explode: ->(attrs)  { attrs[:sides] },
-        reroll:  ->(_attrs) { 1 }
-      }
-
       def initialize(count: nil, die:, label: nil)
         self.raw_count = count
         self.raw_die = die
@@ -44,26 +37,7 @@ module BagOfHolding
       end
 
       def die
-        BagOfHolding::Dice::Die.new die_attrs
-      end
-
-      def die_attrs
-        die_options.reduce({}) do |attrs, attr|
-          attrs.merge die_attr(attr, attrs)
-        end
-      end
-
-      def die_attr(attr, attrs)
-        name = attr.keys.first
-
-        value = attr.values.first
-        value = value.nil? ? DIE_DEFAULTS[name].call(attrs) : value.to_i
-
-        { name => value }
-      end
-
-      def die_options
-        raw_die.select { |attr| DIE_OPTIONS.include? attr.keys.first }
+        DieFactory.build raw_die: raw_die
       end
     end
   end
