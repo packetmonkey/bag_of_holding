@@ -1,9 +1,10 @@
-# Bag of Holding [![Build Status](https://travis-ci.org/packetmonkey/bag_of_holding.svg?branch=travis)](https://travis-ci.org/packetmonkey/bag_of_holding) [![Code Climate](https://codeclimate.com/github/packetmonkey/bag_of_holding/badges/gpa.svg)](https://codeclimate.com/github/packetmonkey/bag_of_holding)
+# Bag of Holding
 
-Bag of Holding is a command line utility and library to help out with various
-table top gaming needs. It currently contains a dice roller but will grow to
-include a dungeon generator, various card deck functions and anything else I
-think to include.
+[![Build Status](https://travis-ci.org/packetmonkey/bag_of_holding.svg?branch=travis)](https://travis-ci.org/packetmonkey/bag_of_holding)
+[![Code Climate](https://codeclimate.com/github/packetmonkey/bag_of_holding/badges/gpa.svg)](https://codeclimate.com/github/packetmonkey/bag_of_holding)
+[![Gem Version](https://badge.fury.io/rb/bag_of_holding.svg)](http://badge.fury.io/rb/bag_of_holding)
+
+A tabletop gaming utility library and CLI
 
 ## Install
 
@@ -18,8 +19,14 @@ gem 'bag_of_holding'
 ```
 
 ## Usage
+All of these examples assume usage of the command line utility. All functions
+should be easily executable via the ruby API as the cli mostly just executes
+high level API call and prints the results.
+
+### Rolling Dice
+#### Example
 ```sh
-./bin/boh roll 1d20+5
+boh roll 1d20+5
 8 = 3 (1d20) + 5
 ```
 
