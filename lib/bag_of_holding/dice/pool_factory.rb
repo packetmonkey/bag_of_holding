@@ -17,7 +17,8 @@ module BagOfHolding
         BagOfHolding::Dice::Pool.new count: pool_count,
                                      die: die,
                                      label: raw_label,
-                                     keep: keep
+                                     keep: keep,
+                                     drop: drop
       end
 
       private
@@ -29,6 +30,14 @@ module BagOfHolding
         return nil if keep_option.nil?
 
         value = keep_option.values.first
+        value.nil? ? 1 : value.to_i
+      end
+
+      def drop
+        drop_option = raw_die.find { |o| o.keys.first == :drop }
+        return nil if drop_option.nil?
+
+        value = drop_option.values.first
         value.nil? ? 1 : value.to_i
       end
 
