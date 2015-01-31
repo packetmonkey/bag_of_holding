@@ -3,15 +3,16 @@ module BagOfHolding
     # Internal: Contains information about the number of dice in a pool, the
     # description of those dice and a label if it has one.
     class Pool
-      attr_accessor :count, :die, :label, :high, :low, :drop
+      attr_accessor :count, :die, :label, :high, :low, :drop, :modifier
 
-      def initialize(count: nil, die: nil, label: nil, high: nil, low: nil, drop: nil)
-        self.count  = count
-        self.die    = die
-        self.label  = label
-        self.high   = high
-        self.low    = low
-        self.drop   = drop
+      def initialize(count: nil, die: nil, label: nil, high: nil, low: nil, drop: nil, modifier: nil)
+        self.count    = count
+        self.die      = die
+        self.label    = label
+        self.high     = high
+        self.low      = low
+        self.drop     = drop
+        self.modifier = modifier
       end
 
       def ==(other)
@@ -21,6 +22,7 @@ module BagOfHolding
           return false unless label == other.label
           return false unless high == other.high
           return false unless low == other.low
+          return false unless modifier == other.modifier
         rescue NoMethodError
           return false
         end
@@ -45,6 +47,7 @@ module BagOfHolding
       end
 
       def calculate_value
+        return modifier.modify die_values if modifier
         calculate_high || calculate_low || calculate_drop || calculate_sum
       end
 

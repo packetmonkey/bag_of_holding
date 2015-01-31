@@ -4,15 +4,18 @@ RSpec.describe BagOfHolding::Dice::Pool do
 
   describe '#initialize' do
     it 'sets the attributes on the class' do
+      modifier = double("modifer", modify: 1369)
       pool = BagOfHolding::Dice::Pool.new(
         count: 2,
         die: BagOfHolding::Dice::Die.new(sides: 10),
-        label: 'Specs'
+        label: 'Specs',
+        modifier: modifier
       )
 
       expect(pool.count).to eq(2)
       expect(pool.die).to eq(BagOfHolding::Dice::Die.new(sides: 10))
       expect(pool.label).to eq('Specs')
+      expect(pool.modifier).to eq(modifier)
     end
   end
 
@@ -80,6 +83,12 @@ RSpec.describe BagOfHolding::Dice::Pool do
       other.low = 2
       expect(subject == other).to eq(false)
     end
+
+    it 'returns false for a pool with a different modifier' do
+      subject.modifier = double('mod1')
+      other.modifier   = double('mod2')
+      expect(subject == other).to eq(false)
+    end
   end
 
   describe '#roll' do
@@ -94,6 +103,20 @@ RSpec.describe BagOfHolding::Dice::Pool do
 
     before :each do
       allow(die).to receive(:roll).and_return(*die_results)
+    end
+
+    context 'with a modifier' do
+      let(:modifier) { double 'modifier' }
+
+      it 'uses the modifier value as a result' do
+        allow(modifier).to receive(:modify).with([3,5,1]).and_return(13579)
+        subject.modifier = modifier
+        expect(subject.roll).to eq(
+          BagOfHolding::Dice::PoolResult.new die_results: die_results,
+                                             value: 13579,
+                                             pool: subject
+        )
+      end
     end
 
     context 'without a high value' do
