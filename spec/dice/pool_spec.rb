@@ -4,7 +4,7 @@ RSpec.describe BagOfHolding::Dice::Pool do
 
   describe '#initialize' do
     it 'sets the attributes on the class' do
-      modifier = double("modifer", modify: 1369)
+      modifier = double('modifer', modify: 1369)
       pool = BagOfHolding::Dice::Pool.new(
         count: 2,
         die: BagOfHolding::Dice::Die.new(sides: 10),
@@ -72,12 +72,6 @@ RSpec.describe BagOfHolding::Dice::Pool do
       expect(subject == other).to eq(false)
     end
 
-    it 'returns false for a pool with a different high' do
-      subject.high = 1
-      other.high = 2
-      expect(subject == other).to eq(false)
-    end
-
     it 'returns false for a pool with a different low' do
       subject.low = 1
       other.low = 2
@@ -109,43 +103,11 @@ RSpec.describe BagOfHolding::Dice::Pool do
       let(:modifier) { double 'modifier' }
 
       it 'uses the modifier value as a result' do
-        allow(modifier).to receive(:modify).with([3,5,1]).and_return(13579)
+        allow(modifier).to receive(:modify).with([3, 5, 1]).and_return(13_579)
         subject.modifier = modifier
         expect(subject.roll).to eq(
           BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                             value: 13579,
-                                             pool: subject
-        )
-      end
-    end
-
-    context 'without a high value' do
-      it 'sums the rolls of the dice in the pool' do
-        expect(subject.roll).to eq(
-          BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                             value: 9,
-                                             pool: subject
-        )
-      end
-    end
-
-    context 'with a high value of 1' do
-      it 'returns the value of the highest die' do
-        subject.high = 1
-        expect(subject.roll).to eq(
-          BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                             value: 5,
-                                             pool: subject
-        )
-      end
-    end
-
-    context 'with a high value of 2' do
-      it 'returns the value of the highest die' do
-        subject.high = 2
-        expect(subject.roll).to eq(
-          BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                             value: 8,
+                                             value: 13_579,
                                              pool: subject
         )
       end

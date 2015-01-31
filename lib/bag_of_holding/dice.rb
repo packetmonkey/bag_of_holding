@@ -19,6 +19,7 @@ require 'bag_of_holding/dice/parser'
 require 'bag_of_holding/dice/pool'
 require 'bag_of_holding/dice/pool_factory'
 require 'bag_of_holding/dice/pool_result'
+require 'bag_of_holding/dice/pool_modifiers'
 
 require 'bag_of_holding/dice/transform'
 

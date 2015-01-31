@@ -17,21 +17,26 @@ module BagOfHolding
         BagOfHolding::Dice::Pool.new count: pool_count,
                                      die: die,
                                      label: raw_label,
-                                     high: high,
                                      drop: drop,
-                                     low: low
+                                     low: low,
+                                     modifier: modifier
       end
 
       private
 
       attr_accessor :raw_count, :raw_die, :raw_label
 
-      def high
+      def modifier
+        high_modifier
+      end
+
+      def high_modifier
         high_option = raw_die.find { |o| o.keys.first == :high }
         return nil if high_option.nil?
 
-        value = high_option.values.first
-        value.nil? ? 1 : value.to_i
+        count = high_option.values.first
+        count = count.nil? ? 1 : count.to_i
+        BagOfHolding::Dice::PoolModifiers::High.new count: count
       end
 
       def low
