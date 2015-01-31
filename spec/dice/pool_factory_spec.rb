@@ -25,6 +25,19 @@ RSpec.describe BagOfHolding::Dice::PoolFactory do
       expect(pool.die).to eq(die)
     end
 
+    it 'calls ModifierFactory to create the modifier' do
+      modifier = double('PoolModifier')
+      allow(BagOfHolding::Dice::ModifierFactory).to(
+        receive(:build).with(raw_die: [{ sides: 20 }, { drop: 2 }])
+                       .and_return(modifier)
+      )
+
+      pool = subject.build count: nil,
+                           die: [{ sides: 20 }, { drop: 2 }],
+                           label: 'Spec'
+      expect(pool.modifier).to eq(modifier)
+    end
+
     it 'defaults a pool count to 1' do
       pool = subject.build count: nil, die: [{ sides: 20 }], label: 'Spec'
       expect(pool).to eq(
@@ -32,51 +45,6 @@ RSpec.describe BagOfHolding::Dice::PoolFactory do
           count: 1,
           die: BagOfHolding::Dice::Die.new(sides: 20),
           label: 'Spec'
-        )
-      )
-    end
-
-    it 'with a high of 2' do
-      modifier = BagOfHolding::Dice::PoolModifiers::High.new count: 2
-      pool = subject.build count: nil,
-                           die: [{ sides: 20 }, { high: 2 }],
-                           label: 'Spec'
-      expect(pool).to eq(
-        BagOfHolding::Dice::Pool.new(
-          count: 1,
-          die: BagOfHolding::Dice::Die.new(sides: 20),
-          label: 'Spec',
-          modifier: modifier
-        )
-      )
-    end
-
-    it 'with a drop of 2' do
-      modifier = BagOfHolding::Dice::PoolModifiers::Drop.new count: 2
-      pool = subject.build count: 3,
-                           die: [{ sides: 20 }, { drop: 2 }],
-                           label: 'Spec'
-      expect(pool).to eq(
-        BagOfHolding::Dice::Pool.new(
-          count: 3,
-          die: BagOfHolding::Dice::Die.new(sides: 20),
-          label: 'Spec',
-          modifier: modifier
-        )
-      )
-    end
-
-    it 'with a low of 2' do
-      modifier = BagOfHolding::Dice::PoolModifiers::Low.new count: 2
-      pool = subject.build count: nil,
-                           die: [{ sides: 20 }, { low: 2 }],
-                           label: 'Spec'
-      expect(pool).to eq(
-        BagOfHolding::Dice::Pool.new(
-          count: 1,
-          die: BagOfHolding::Dice::Die.new(sides: 20),
-          label: 'Spec',
-          modifier: modifier
         )
       )
     end
