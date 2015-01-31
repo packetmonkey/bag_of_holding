@@ -110,8 +110,9 @@ RSpec.describe BagOfHolding::Dice::Pool do
 
   describe '#to_s' do
     it 'returns the die str' do
+      subject.label = 'Attack'
       subject.die = double(to_s: 'd172')
-      expect(subject.to_s).to eq('2d172')
+      expect(subject.to_s).to eq('Attack 2d172')
     end
   end
 end

@@ -32,7 +32,10 @@ module BagOfHolding
       end
 
       def to_s
-        "#{count}#{die}"
+        ''.tap do |str|
+          str << "#{label} " if label
+          str << "#{count}#{die}"
+        end
       end
 
       private
