@@ -20,13 +20,13 @@ RSpec.describe BagOfHolding::Dice::Transform do
       ])
     end
 
-    it 'transforms 2d20k' do
-      tree = parser.parse '2d20k'
+    it 'transforms 2d20h' do
+      tree = parser.parse '2d20h'
       expect(subject.apply(tree)).to match([
         BagOfHolding::Dice::Pool.new(
           count: 2,
           die: BagOfHolding::Dice::Die.new(sides: 20),
-          keep: 1
+          high: 1
         )
       ])
     end

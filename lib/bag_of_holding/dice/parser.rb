@@ -14,9 +14,9 @@ module BagOfHolding
 
       rule(:exploding)  { str('e') >> integer.maybe.as(:explode) }
       rule(:reroll)     { str('r') >> integer.maybe.as(:reroll) }
-      rule(:keep)       { str('k') >> integer.maybe.as(:keep) }
+      rule(:high)       { match('[hk]') >> integer.maybe.as(:high) }
       rule(:drop)       { str('d') >> integer.maybe.as(:drop) }
-      rule(:option)     { exploding | reroll | keep | drop }
+      rule(:option)     { exploding | reroll | high | drop }
       rule(:options)    { option.repeat }
       rule(:options?)   { options.maybe }
 

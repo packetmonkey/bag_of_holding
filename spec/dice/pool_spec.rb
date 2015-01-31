@@ -84,7 +84,7 @@ RSpec.describe BagOfHolding::Dice::Pool do
       allow(die).to receive(:roll).and_return(*die_results)
     end
 
-    context 'without a keep value' do
+    context 'without a high value' do
       it 'sums the rolls of the dice in the pool' do
         expect(subject.roll).to eq(
           BagOfHolding::Dice::PoolResult.new die_results: die_results,
@@ -94,9 +94,9 @@ RSpec.describe BagOfHolding::Dice::Pool do
       end
     end
 
-    context 'with a keep value of 1' do
+    context 'with a high value of 1' do
       it 'returns the value of the highest die' do
-        subject.keep = 1
+        subject.high = 1
         expect(subject.roll).to eq(
           BagOfHolding::Dice::PoolResult.new die_results: die_results,
                                              value: 5,
@@ -105,9 +105,9 @@ RSpec.describe BagOfHolding::Dice::Pool do
       end
     end
 
-    context 'with a keep value of 2' do
+    context 'with a high value of 2' do
       it 'returns the value of the highest die' do
-        subject.keep = 2
+        subject.high = 2
         expect(subject.roll).to eq(
           BagOfHolding::Dice::PoolResult.new die_results: die_results,
                                              value: 8,

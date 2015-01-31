@@ -17,7 +17,7 @@ module BagOfHolding
         BagOfHolding::Dice::Pool.new count: pool_count,
                                      die: die,
                                      label: raw_label,
-                                     keep: keep,
+                                     high: high,
                                      drop: drop
       end
 
@@ -25,11 +25,11 @@ module BagOfHolding
 
       attr_accessor :raw_count, :raw_die, :raw_label
 
-      def keep
-        keep_option = raw_die.find { |o| o.keys.first == :keep }
-        return nil if keep_option.nil?
+      def high
+        high_option = raw_die.find { |o| o.keys.first == :high }
+        return nil if high_option.nil?
 
-        value = keep_option.values.first
+        value = high_option.values.first
         value.nil? ? 1 : value.to_i
       end
 
