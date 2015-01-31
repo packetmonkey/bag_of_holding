@@ -52,13 +52,16 @@ RSpec.describe BagOfHolding::Dice::PoolFactory do
     end
 
     it 'with a low of 2' do
-      pool = subject.build count: nil, die: [{ sides: 20 }, { low: 2 }], label: 'Spec'
+      modifier = BagOfHolding::Dice::PoolModifiers::Low.new count: 2
+      pool = subject.build count: nil,
+                           die: [{ sides: 20 }, { low: 2 }],
+                           label: 'Spec'
       expect(pool).to eq(
         BagOfHolding::Dice::Pool.new(
           count: 1,
           die: BagOfHolding::Dice::Die.new(sides: 20),
           label: 'Spec',
-          low: 2
+          modifier: modifier
         )
       )
     end

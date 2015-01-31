@@ -18,7 +18,6 @@ module BagOfHolding
                                      die: die,
                                      label: raw_label,
                                      drop: drop,
-                                     low: low,
                                      modifier: modifier
       end
 
@@ -27,7 +26,7 @@ module BagOfHolding
       attr_accessor :raw_count, :raw_die, :raw_label
 
       def modifier
-        high_modifier
+        high_modifier || low_modifier
       end
 
       def high_modifier
@@ -39,12 +38,13 @@ module BagOfHolding
         BagOfHolding::Dice::PoolModifiers::High.new count: count
       end
 
-      def low
+      def low_modifier
         low_option = raw_die.find { |o| o.keys.first == :low }
         return nil if low_option.nil?
 
-        value = low_option.values.first
-        value.nil? ? 1 : value.to_i
+        count = low_option.values.first
+        count = count.nil? ? 1 : count.to_i
+        BagOfHolding::Dice::PoolModifiers::Low.new count: count
       end
 
       def drop

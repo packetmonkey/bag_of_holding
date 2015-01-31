@@ -37,7 +37,7 @@ RSpec.describe BagOfHolding::Dice::Transform do
         BagOfHolding::Dice::Pool.new(
           count: 2,
           die: BagOfHolding::Dice::Die.new(sides: 20),
-          low: 1
+          modifier: BagOfHolding::Dice::PoolModifiers::Low.new(count: 1)
         )
       ])
     end
@@ -48,7 +48,7 @@ RSpec.describe BagOfHolding::Dice::Transform do
         BagOfHolding::Dice::Pool.new(
           count: 2,
           die: BagOfHolding::Dice::Die.new(sides: 20),
-          low: 2
+          modifier: BagOfHolding::Dice::PoolModifiers::Low.new(count: 2)
         )
       ])
     end

@@ -1,9 +1,9 @@
-RSpec.describe BagOfHolding::Dice::PoolModifiers::High do
-  subject { BagOfHolding::Dice::PoolModifiers::High.new count: 2 }
+RSpec.describe BagOfHolding::Dice::PoolModifiers::Low do
+  subject { BagOfHolding::Dice::PoolModifiers::Low.new count: 2 }
 
   describe '#initialize' do
     it 'sets the count as passed' do
-      modifier = BagOfHolding::Dice::PoolModifiers::High.new count: 99
+      modifier = BagOfHolding::Dice::PoolModifiers::Low.new count: 99
       expect(modifier.count).to eq(99)
     end
   end
@@ -22,14 +22,14 @@ RSpec.describe BagOfHolding::Dice::PoolModifiers::High do
   end
 
   describe '#modify' do
-    it 'sums the highest number of rolls determined by the count' do
+    it 'sums the lowest number of rolls determined by the count' do
       result = subject.modify [1, 3, 5]
-      expect(result).to eq(8)
+      expect(result).to eq(4)
     end
   end
 
   describe '#==' do
-    let(:other) { BagOfHolding::Dice::PoolModifiers::High.new count: 2 }
+    let(:other) { BagOfHolding::Dice::PoolModifiers::Low.new count: 2 }
 
     it 'returns true when other has the same count' do
       expect(subject == other).to eq(true)
