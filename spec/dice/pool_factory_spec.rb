@@ -35,5 +35,29 @@ RSpec.describe BagOfHolding::Dice::PoolFactory do
         )
       )
     end
+
+    it 'with a high of 2' do
+      pool = subject.build count: nil, die: [{ sides: 20 }, { high: 2 }], label: 'Spec'
+      expect(pool).to eq(
+        BagOfHolding::Dice::Pool.new(
+          count: 1,
+          die: BagOfHolding::Dice::Die.new(sides: 20),
+          label: 'Spec',
+          high: 2
+        )
+      )
+    end
+
+    it 'with a low of 2' do
+      pool = subject.build count: nil, die: [{ sides: 20 }, { low: 2 }], label: 'Spec'
+      expect(pool).to eq(
+        BagOfHolding::Dice::Pool.new(
+          count: 1,
+          die: BagOfHolding::Dice::Die.new(sides: 20),
+          label: 'Spec',
+          low: 2
+        )
+      )
+    end
   end
 end

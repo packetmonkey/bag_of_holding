@@ -68,6 +68,18 @@ RSpec.describe BagOfHolding::Dice::Pool do
       other.label = 'Others'
       expect(subject == other).to eq(false)
     end
+
+    it 'returns false for a pool with a different high' do
+      subject.high = 1
+      other.high = 2
+      expect(subject == other).to eq(false)
+    end
+
+    it 'returns false for a pool with a different low' do
+      subject.low = 1
+      other.low = 2
+      expect(subject == other).to eq(false)
+    end
   end
 
   describe '#roll' do
@@ -111,6 +123,28 @@ RSpec.describe BagOfHolding::Dice::Pool do
         expect(subject.roll).to eq(
           BagOfHolding::Dice::PoolResult.new die_results: die_results,
                                              value: 8,
+                                             pool: subject
+        )
+      end
+    end
+
+    context 'with a low value of 1' do
+      it 'returns the value of the lowest die' do
+        subject.low = 1
+        expect(subject.roll).to eq(
+          BagOfHolding::Dice::PoolResult.new die_results: die_results,
+                                             value: 1,
+                                             pool: subject
+        )
+      end
+    end
+
+    context 'with a low value of 2' do
+      it 'returns the value of the lowest die' do
+        subject.low = 2
+        expect(subject.roll).to eq(
+          BagOfHolding::Dice::PoolResult.new die_results: die_results,
+                                             value: 4,
                                              pool: subject
         )
       end

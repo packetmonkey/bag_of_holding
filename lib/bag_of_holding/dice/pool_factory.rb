@@ -18,7 +18,8 @@ module BagOfHolding
                                      die: die,
                                      label: raw_label,
                                      high: high,
-                                     drop: drop
+                                     drop: drop,
+                                     low: low
       end
 
       private
@@ -30,6 +31,14 @@ module BagOfHolding
         return nil if high_option.nil?
 
         value = high_option.values.first
+        value.nil? ? 1 : value.to_i
+      end
+
+      def low
+        low_option = raw_die.find { |o| o.keys.first == :low }
+        return nil if low_option.nil?
+
+        value = low_option.values.first
         value.nil? ? 1 : value.to_i
       end
 

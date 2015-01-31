@@ -37,6 +37,20 @@ RSpec.describe BagOfHolding::Dice::Parser do
       ])
     end
 
+    it 'parses 2d20l' do
+      tree = subject.parse '2d20l'
+      expect(tree).to match([
+        { count: '2', die: [{ sides: '20' }, { low: nil }] }
+      ])
+    end
+
+    it 'parses 3d20l2' do
+      tree = subject.parse '3d20l2'
+      expect(tree).to match([
+        { count: '3', die: [{ sides: '20' }, { low: '2' }] }
+      ])
+    end
+
     it 'parses 2d20d' do
       tree = subject.parse '2d20d'
       expect(tree).to match([
