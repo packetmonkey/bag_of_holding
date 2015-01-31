@@ -106,28 +106,6 @@ RSpec.describe BagOfHolding::Dice::Pool do
         )
       end
     end
-
-    context 'with a drop value of 1' do
-      it 'returns the value of the highest die' do
-        subject.drop = 1
-        expect(subject.roll).to eq(
-          BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                             value: 8,
-                                             pool: subject
-        )
-      end
-    end
-
-    context 'with a drop value of 2' do
-      it 'returns the value of the highest die' do
-        subject.drop = 2
-        expect(subject.roll).to eq(
-          BagOfHolding::Dice::PoolResult.new die_results: die_results,
-                                             value: 5,
-                                             pool: subject
-        )
-      end
-    end
   end
 
   describe '#to_s' do
